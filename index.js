@@ -1,33 +1,47 @@
 "use strict"
 
-let clicked = false;
+let allowDraw = false;
+
 
 const container = document.getElementById("container");
-container.addEventListener("mousedown", () => {clicked = true;}, false);
-container.addEventListener("mouseup", () => {clicked = true;}, false);
+const cleanGrid = document.getElementById("clear");
 
 
 
+function drawGrid(sqrs=16){
+    let maxGrid = sqrs * sqrs;
+    for (let i=0; i<maxGrid; i++){    
+        
+        const newDiv = document.createElement("div");
+
+        newDiv.classList.add("divStyle");
+        container.append(newDiv);
+        newDiv.addEventListener("mouseover", mouseOver, false);
+     }
+    }
+
+drawGrid();
 
 
+container.addEventListener("mouseup", clicked, false);
+container.addEventListener("mousedown", clicked, false);
+cleanGrid.addEventListener("click", cleanIt, false);
 
-let maxGrid = 16 * 16;
-
-for (let i=0; i<maxGrid; i++){
+function clicked(event){
     
-    
-    const newDiv = document.createElement("div");
-
-    newDiv.classList.add("divStyle");
-    container.append(newDiv);
-    newDiv.addEventListener("mouseover", mouseOver, false);
-   
-    
-
+    console.log(event.type);
+    if(event.type==="mousedown"){
+        //event.preventDefault();
+        allowDraw=true;
+    } else {
+        allowDraw = false;
+    }
 }
 
+
+
 function mouseOver(event){
-    if(clicked){
+    if(allowDraw){
         event.target.style.backgroundColor = "black";
     }
     
@@ -35,7 +49,15 @@ function mouseOver(event){
 
 //container.style.gridTemplateColumns = "repeat(10, 1fr)";
 
+function cleanIt(){
+    var child = container.lastElementChild; 
+        while (child) {
+            container.removeChild(child);
+            child = container.lastElementChild;
+        }
 
+    drawGrid();
+}
   
  
 
