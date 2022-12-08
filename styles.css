@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    background-color: burlywood;
+}
+
+#container{
+    margin: 20px;
+    background-color: blueviolet;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    width: 300px;
+    height: 300px;
+}
+
+.divStyle{
+    background-color: rgb(0, 225, 255);
+    /* height: 12px;
+    width: 12px; */
+    border: solid 1px;
+}
