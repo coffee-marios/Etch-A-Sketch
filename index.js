@@ -1,12 +1,23 @@
 "use strict"
 
+
+// Grid
 let allowDraw = false;
 let gridSquares = 16;
 
 
+// Drawing colors
+let colorStatus = false;
+let redColor = 0;
+let greenColor = 0;
+let blueColor = 0;
+
+
+// Elements
 const container = document.getElementById("container");
 const cleanGrid = document.getElementById("clear");
 const newGrid = document.getElementById("popup");
+const randomColor = document.getElementById("random");
 
 
 function drawGrid(sqrs=gridSquares){
@@ -28,17 +39,27 @@ container.addEventListener("mouseup", clicked, false);
 container.addEventListener("mousedown", clicked, false);
 cleanGrid.addEventListener("click", cleanIt, false);
 newGrid.addEventListener("click", drawNewGrid, false);
+randomColor.addEventListener("click", drawRandomColor, false);
 
 
 
 function clicked(event){
     
     console.log(event.type);
-    if(event.type==="mousedown"){
-        event.target.style.backgroundColor = "black";
+    if(event.type==="mousedown" && colorStatus === false){
+        event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
         event.preventDefault();
         allowDraw=true;
-    } else {
+    } else if(event.type==="mousedown" && colorStatus === true){
+        redColor = Math.floor(Math.random() * 256);
+        blueColor = Math.floor(Math.random() * 256);
+        greenColor = Math.floor(Math.random() * 256);
+        event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
+
+        allowDraw=true;     
+    } 
+    
+    else {
         allowDraw = false;
     }
 }
@@ -46,13 +67,22 @@ function clicked(event){
 
 
 function mouseOver(event){
-    if(allowDraw){
-        event.target.style.backgroundColor = "black";
+    if(allowDraw && colorStatus === false){
+        
+        event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
+    }
+
+    if (allowDraw && colorStatus){
+        redColor = Math.floor(Math.random() * 256);
+        blueColor = Math.floor(Math.random() * 256);
+        greenColor = Math.floor(Math.random() * 256);
+        event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
+
     }
     
 }
 
-//
+
 
 function cleanIt(){
     let child = container.lastElementChild; 
@@ -63,6 +93,8 @@ function cleanIt(){
     
     drawGrid(gridSquares);
 }
+
+
 
 function drawNewGrid(){
     let gridPrompt = prompt("To create a new grid enter the number of squares per side", 17);
@@ -75,7 +107,14 @@ function drawNewGrid(){
 
 }
   
- 
+function drawRandomColor(){
+    colorStatus = !colorStatus;
+    if (colorStatus==false){
+        redColor =0;
+        greenColor=0; 
+        blueColor = 0;
+    }  
+} 
 
 
 
