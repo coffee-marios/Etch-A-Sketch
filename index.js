@@ -4,6 +4,8 @@
 // Grid
 let allowDraw = false;
 let gridSquares = 16;
+let newDiv;
+let haveBorders = true;
 
 
 // Drawing colors
@@ -18,13 +20,14 @@ const container = document.getElementById("container");
 const cleanGrid = document.getElementById("clear");
 const newGrid = document.getElementById("popup");
 const randomColor = document.getElementById("random");
+const borderToggle = document.getElementById("border-toggle");
 
 
 function drawGrid(sqrs=gridSquares){
     let maxGrid = sqrs * sqrs;
     for (let i=0; i<maxGrid; i++){    
         
-        const newDiv = document.createElement("div");
+        newDiv = document.createElement("div");
 
         newDiv.classList.add("divStyle");
         container.append(newDiv);
@@ -34,13 +37,27 @@ function drawGrid(sqrs=gridSquares){
 
 drawGrid();
 
-
+// Event listeners
 container.addEventListener("mouseup", clicked, false);
 container.addEventListener("mousedown", clicked, false);
 cleanGrid.addEventListener("click", cleanIt, false);
 newGrid.addEventListener("click", drawNewGrid, false);
 randomColor.addEventListener("click", drawRandomColor, false);
+borderToggle.addEventListener("click", toggleBorder, false);
 
+
+function toggleBorder(){
+    haveBorders = !haveBorders;
+    for (const child of container.children) {
+        if (!haveBorders){
+        child.style.border= 'none';
+        }
+        if (haveBorders){
+            child.style.border= '1px solid #f33';
+        }
+    }
+    
+}
 
 
 function clicked(event){

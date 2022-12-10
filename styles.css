@@ -12,7 +12,7 @@
 }
 
 #container{
-    padding: 20px;
+    padding: 10px;
     background-color: blueviolet;
     display: grid;
     grid-template-columns: repeat(16, 1fr);
@@ -23,6 +23,10 @@
     background-color: rgb(255, 255, 255);
     /* height: 12px;
     width: 12px; */
-    /* border: solid 1px; */
+    border: 1px solid #f33;
     user-select: none;
+}
+
+button{
+    margin-left: 10px;
 }
