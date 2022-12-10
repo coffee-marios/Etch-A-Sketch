@@ -115,7 +115,8 @@ function cleanIt(){
 
 function drawNewGrid(){
     let gridPrompt = prompt("To create a new grid enter the number of squares per side", 17);
-    if (gridPrompt<=100){
+    
+    if (gridPrompt<=100 && gridPrompt !== null && gridPrompt !== ''){
         gridSquares = gridPrompt;
 
         container.style.gridTemplateColumns = `repeat(${gridSquares}, 1fr)`;

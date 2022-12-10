@@ -1,32 +1,35 @@
 *{
     margin: 0;
     background-color: burlywood;
+    text-align: center;
 }
 
 #app{
-    margin: 40px;
-    padding: 10px;
-    width: 90vw;
-    
+    /* margin: 40px; */
+    padding: 10px 1px;
+    width: 99vw;
+    text-align: center;
+    border: black;
     background-color: blueviolet;
+    margin: auto;
 }
 
 #container{
-    padding: 10px;
+    padding: 0;
     background-color: blueviolet;
     display: grid;
     grid-template-columns: repeat(16, 1fr);
-    height: 30vw;
+    height: 70vh;
+    border: black;
+    margin:auto;
 }
 
 .divStyle{
     background-color: rgb(255, 255, 255);
-    /* height: 12px;
-    width: 12px; */
     border: 1px solid #f33;
     user-select: none;
 }
 
 button{
-    margin-left: 10px;
+    margin: 15px 15px;
 }
