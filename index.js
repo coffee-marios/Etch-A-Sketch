@@ -136,7 +136,7 @@ function cleanIt(){
 
 
 function drawNewGrid(){
-    let gridPrompt = prompt("To create a new grid enter the number of squares per side", 17);
+    let gridPrompt = prompt("To create a new grid enter the number of squares per side", 30);
     
     if (gridPrompt<=100 && gridPrompt !== null && gridPrompt !== ''){
         gridSquares = gridPrompt;
