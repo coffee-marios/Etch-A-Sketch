@@ -9,7 +9,8 @@ let haveBorders = true;
 
 
 // Drawing colors
-let colorStatus = false;
+let colorStatus = false; // for multiple colors
+let shadowStatus = false; // for adding blackness
 let redColor = 0;
 let greenColor = 0;
 let blueColor = 0;
@@ -20,6 +21,9 @@ const container = document.getElementById("container");
 const cleanGrid = document.getElementById("clear");
 const newGrid = document.getElementById("popup");
 const randomColor = document.getElementById("random");
+const shadowColor = document.getElementById("blackness");
+
+
 const borderToggle = document.getElementById("border-toggle");
 
 
@@ -43,6 +47,7 @@ container.addEventListener("mousedown", clicked, false);
 cleanGrid.addEventListener("click", cleanIt, false);
 newGrid.addEventListener("click", drawNewGrid, false);
 randomColor.addEventListener("click", drawRandomColor, false);
+shadowColor.addEventListener("click", drawShadowColor, false);
 borderToggle.addEventListener("click", toggleBorder, false);
 
 
@@ -63,18 +68,27 @@ function toggleBorder(){
 function clicked(event){
     
     console.log(event.type);
-    if(event.type==="mousedown" && colorStatus === false){
+    if(event.type==="mousedown" && colorStatus === false && shadowStatus === false){
         event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
         event.preventDefault();
         allowDraw=true;
     } else if(event.type==="mousedown" && colorStatus === true){
+    
         redColor = Math.floor(Math.random() * 256);
         blueColor = Math.floor(Math.random() * 256);
         greenColor = Math.floor(Math.random() * 256);
         event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
 
         allowDraw=true;     
-    } 
+    } else if(event.type === "mousedown" && shadowStatus === true){
+        console.log(redColor)
+        redColor = 200;
+        blueColor = 200;
+        greenColor= 200;
+        event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
+        allowDraw = true;
+
+    }
     
     else {
         allowDraw = false;
@@ -84,7 +98,15 @@ function clicked(event){
 
 
 function mouseOver(event){
-    if(allowDraw && colorStatus === false){
+    
+    if (shadowStatus) {
+        if (redColor>0) {redColor -= 20;}
+        if (greenColor>0) {greenColor -= 20;}
+        if (blueColor>0) {blueColor -= 20;}
+
+    }
+    
+    if((allowDraw && colorStatus === false) || (shadowStatus===true && allowDraw)){
         
         event.target.style.backgroundColor = `rgb(${redColor}, ${greenColor}, ${blueColor})`;
     }
@@ -127,6 +149,7 @@ function drawNewGrid(){
   
 function drawRandomColor(){
     colorStatus = !colorStatus;
+    shadowStatus = false;
     if (colorStatus==false){
         redColor =0;
         greenColor=0; 
@@ -134,7 +157,18 @@ function drawRandomColor(){
     }  
 } 
 
+function drawShadowColor(){
+    
+    shadowStatus = !shadowStatus;
+    // console.log(shadowStatus)
 
+    colorStatus = false;
+    if (shadowStatus==false){
+        redColor =0;
+        greenColor=0; 
+        blueColor = 0;
+    }  
+} 
 
 
 
